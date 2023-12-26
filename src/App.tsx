@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Methods, requests } from "./api/universal";
-import { Table } from "./components";
+import { _Table } from "./components";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -10,7 +10,7 @@ function App() {
   }, []);
 
   return (
-     <Table posts={posts}></Table>
+     <_Table posts={posts}></_Table>
   );
 }
 
