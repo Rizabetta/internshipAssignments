@@ -27,8 +27,6 @@ function _Table({ posts }: Posts) {
     dataSource = posts.map((el) => ({ ...el, key: nanoid() }));
   }
 
-  let column = undefined;
-  if (posts && posts.length > 0) column = Object.keys(posts[0]);
   return (
     <div>
       <Row>
