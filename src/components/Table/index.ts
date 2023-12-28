@@ -1,1 +1,0 @@
-export { _Table } from "./_Table";

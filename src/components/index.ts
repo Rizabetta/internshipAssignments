@@ -1,1 +1,3 @@
-export { _Table } from "./Table";
+export { Table } from "./UI/Table";
+export { Input } from "./UI/Input";
+export { Modal } from "./UI/Modal";
