@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Methods, Url, requests } from "../../api/api.config";
 import { Table } from "../../components";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -9,9 +10,12 @@ function Home() {
       .makeApiRequest(Methods.GET, Url.POST + "/1/comments")
       .then((r) => setPosts(r.data));
   }, []);
+
+  const navigate = useNavigate();
+
   return (
     <main>
-      <a href="/details">Создать</a>
+      <button onClick={() => navigate("/details")}>Создать</button>
       <Table posts={posts}></Table>
     </main>
   );

@@ -1,16 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { FormClientDetails, Home } from "../pages";
-
-export enum RouteNames {
-  NOT = "*",
-  HOME = "/",
-  DETAILS = "/details",
-}
-
-export const routes = [
-  { path: RouteNames.HOME, element: <Home /> },
-  { path: RouteNames.DETAILS, element: <FormClientDetails /> },
-];
+import { routes } from "./routes";
 
 const Routers = () => {
   return (
