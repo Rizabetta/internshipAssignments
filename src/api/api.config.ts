@@ -1,10 +1,6 @@
 import axios from "axios";
 
 const url = "https://jsonplaceholder.typicode.com";
-export enum Url {
-  POST = url + "/posts",
-  COUNTRIES = url + "/users",
-}
 
 export enum Methods {
   GET = "get",
@@ -13,11 +9,11 @@ export enum Methods {
   DELETE = "delete",
 }
 
-const makeApiRequest = async (method: Methods, path :string, data = {}) => {
+const makeApiRequest = async (method: Methods, path: string, data = {}) => {
   try {
     const res = await axios({
       method: method,
-      url: `${path}`,
+      url: `${url}${path}`,
       data: data,
     });
     return res;
