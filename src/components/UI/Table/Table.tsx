@@ -21,6 +21,7 @@ const Table = ({ posts }: Posts) => {
       dataIndex: key,
       key: key,
       sorter: (a: any, b: any) => a.key - b.key,
+      ellipsis: true,
     }));
     dataSource = posts.map((el) => ({ ...el, key: nanoid() }));
   }

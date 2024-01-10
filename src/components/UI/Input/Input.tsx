@@ -1,32 +1,20 @@
-import { Form, Input as InputAnd, DatePicker, InputNumber } from "antd";
-const { RangePicker } = DatePicker;
+import { Input as InputAntd } from "antd";
+
 type TInputProps = {
-  data: {
-    type: string;
-    name?: string;
-    label: string;
-    required?: boolean;
-    message?: string;
-  };
+  placeholder?: string | undefined;
+  value?: string | number | bigint | readonly string[] | undefined;
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
 };
 
-const Input = ({ data }: TInputProps) => {
+const Input = ({ placeholder, value, onChange, onBlur }: TInputProps) => {
   return (
-    <Form.Item
-      label={data.label}
-      name={data.name}
-      rules={[
-        {
-          required: data.required,
-          message: data.message,
-        },
-      ]}
-    >
-      {data.type === "Input" && <InputAnd />}
-      {data.type === "DatePicker" && <DatePicker />}
-      {data.type === "RangePicker" && <RangePicker />}
-      {data.type === "InputNumber" && <InputNumber />}
-    </Form.Item>
+    <InputAntd
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+    ></InputAntd>
   );
 };
 export { Input };
