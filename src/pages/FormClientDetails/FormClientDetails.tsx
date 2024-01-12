@@ -1,45 +1,13 @@
-import { Button, Form, Modal, Select } from "antd";
-import { Input } from "../../components";
-import { useEffect, useState } from "react";
-import { Methods, Url, requests } from "../../api/api.config";
-import { clientDetails } from "./FormClientDetails.constant";
+import { useState } from "react";
+import { Button } from "antd";
 import { nanoid } from "nanoid";
-const { Option } = Select;
+import { Modal } from "../../components";
+import { clientDetails } from "./FormClientDetails.constant";
+import { useForm, Controller } from "react-hook-form";
 
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
-
-let users: string[];
 const FormClientDetails = () => {
-  const [form] = Form.useForm();
-  useEffect(() => {
-    requests
-      .makeApiRequest(Methods.GET, Url.COUNTRIES)
-      .then((el) => (users = el.data));
-  }, []);
-  const onGenderChange = (value: string) => {
-    switch (value) {
-      case "male":
-        form.setFieldsValue({ note: "Hi, man!" });
-        break;
-      case "female":
-        form.setFieldsValue({ note: "Hi, lady!" });
-        break;
-      case "other":
-        form.setFieldsValue({ note: "Hi there!" });
-        break;
-      default:
-    }
-  };
-
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-
   const showModal = () => {
     setOpen(true);
   };
@@ -56,75 +24,52 @@ const FormClientDetails = () => {
     setOpen(false);
   };
 
+  const { handleSubmit, control } = useForm();
+  const onSubmit = (data: any) => {
+    showModal();
+    console.log(data);
+  };
+
   return (
     <main>
       <h1>Сведения о клиенте</h1>
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        style={{
-          maxWidth: 600,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        {clientDetails.map((data) => (
-          <Input key={nanoid()} data={data}></Input>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {clientDetails.map(({ label, component, ...props }) => (
+          <div key={nanoid()}>
+            <label htmlFor={label}>{label}</label>
+            <Controller
+              control={control}
+              name={label}
+              render={({ field }) => {
+                const { ref, ...rest } = field;
+                const FieldComponent = component;
+                return <FieldComponent {...rest} {...props} />;
+              }}
+            />
+          </div>
         ))}
 
-        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
-          <Select
-            showSearch
-            placeholder="Select a option and change input text above"
-            onChange={onGenderChange}
-            allowClear
-          >
-            {users?.map(()=>  <Option value="male">male</Option>)}
-            <Option value="male">male</Option>
-            <Option value="female">female</Option>
-            <Option value="other">other</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
+        <button type="submit">Сохранить</button>
+
+        <Modal
+          title={"Вы хотите очистить форму?"}
+          open={open}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
         >
-          <Button type="primary" htmlType="submit" onClick={showModal}>
-            Сохранить
+          <Button key="back" onClick={handleCancel}>
+            Нет
           </Button>
-          <Modal
-            open={open}
-            onOk={handleOk}
-            onCancel={handleCancel}
-            footer={[
-              <Button key="back" onClick={handleCancel}>
-                Нет
-              </Button>,
-              <Button
-                key="submit"
-                type="primary"
-                loading={loading}
-                onClick={handleOk}
-              >
-                Да
-              </Button>,
-            ]}
+          <Button
+            key="submit"
+            type="primary"
+            loading={loading}
+            onClick={handleOk}
           >
-            <p>Вы хотите очистить форму?</p>
-          </Modal>
-        </Form.Item>
-      </Form>
+            Да
+          </Button>
+        </Modal>
+      </form>
     </main>
   );
 };
