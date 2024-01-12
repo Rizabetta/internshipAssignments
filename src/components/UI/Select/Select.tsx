@@ -1,20 +1,22 @@
 import { Select as SelectAntd } from "antd";
-import { TUsers } from "../../../pages/FormClientDetails/FormClientDetails";
 
 type TSelectProps = {
   defaultValue?: any;
-  options: TUsers | undefined;
+  options?: {
+    label: string;
+    value: string;
+  }[];
+  placeholder?: React.ReactNode;
+  required?: boolean | undefined;
 };
 
-const Select = ({ defaultValue, options }: TSelectProps) => {
-  const propOptions = options?.map((option) => {
-    return {
-      value: option,
-      label: option,
-    };
-  });
+const Select = ({ defaultValue, options, placeholder }: TSelectProps) => {
   return (
-    <SelectAntd defaultValue={defaultValue} options={propOptions}></SelectAntd>
+    <SelectAntd
+      defaultValue={defaultValue}
+      options={options}
+      placeholder={placeholder}
+    ></SelectAntd>
   );
 };
 export { Select };
