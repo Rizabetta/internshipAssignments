@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Button } from "antd";
 import { nanoid } from "nanoid";
 import { Modal } from "../../components";
 import { clientDetails } from "./FormClientDetails.constant";
-import { useForm, Controller } from "react-hook-form";
 
 const FormClientDetails = () => {
   const [loading, setLoading] = useState(false);
@@ -24,9 +24,20 @@ const FormClientDetails = () => {
     setOpen(false);
   };
 
-  const { handleSubmit, control } = useForm();
-  const onSubmit = (data: any) => {
-    showModal();
+  type TFormData = {
+    Birthday: any;
+    City: any;
+    ITN: number;
+    MiddleName: string;
+    Name: string;
+    PhoneNumber: number;
+    DatesTraining: any;
+    Surname: string;
+  };
+
+  const { handleSubmit, control } = useForm<TFormData>();
+  const onSubmit: SubmitHandler<TFormData> = (data) => {
+    if (data.Birthday && data.DatesTraining && data.City) showModal();
     console.log(data);
   };
 
@@ -34,20 +45,22 @@ const FormClientDetails = () => {
     <main>
       <h1>Сведения о клиенте</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {clientDetails.map(({ label, component, ...props }) => (
-          <div key={nanoid()}>
-            <label htmlFor={label}>{label}</label>
-            <Controller
-              control={control}
-              name={label}
-              render={({ field }) => {
-                const { ref, ...rest } = field;
-                const FieldComponent = component;
-                return <FieldComponent {...rest} {...props} />;
-              }}
-            />
-          </div>
-        ))}
+        {clientDetails.map(
+          ({ label, name, component, ...props }) => (
+            <div key={nanoid()}>
+              <label htmlFor={name}>{label}</label>
+              <Controller
+                control={control}
+                name={name as keyof TFormData}
+                render={({ field }) => {
+                  const { ref, ...rest } = field;
+                  const FieldComponent = component;
+                  return <FieldComponent {...rest} {...props} />;
+                }}
+              />
+            </div>
+          )
+        )}
 
         <button type="submit">Сохранить</button>
 
