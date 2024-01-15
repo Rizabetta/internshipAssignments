@@ -1,6 +1,9 @@
 import { Select as SelectAntd } from "antd";
+import { SizeType } from "antd/es/config-provider/SizeContext";
 
-type TSelectProps = {
+export type TSelectProps = {
+  mode?: "multiple" | "tags" | undefined;
+  size?: SizeType;
   defaultValue?: any;
   options?: {
     label: string;
@@ -8,14 +11,27 @@ type TSelectProps = {
   }[];
   placeholder?: React.ReactNode;
   required?: boolean | undefined;
+  optionLabelProp?: string | undefined;
 };
 
-const Select = ({ defaultValue, options, placeholder }: TSelectProps) => {
+const Select = ({
+  optionLabelProp,
+  mode,
+  size,
+  defaultValue,
+  options,
+  placeholder,
+  ...props
+}: TSelectProps) => {
   return (
     <SelectAntd
+      optionLabelProp={optionLabelProp}
+      mode={mode}
+      size={size}
       defaultValue={defaultValue}
       options={options}
       placeholder={placeholder}
+      {...props}
     ></SelectAntd>
   );
 };

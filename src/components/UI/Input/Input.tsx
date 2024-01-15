@@ -2,27 +2,26 @@ import { Input as InputAntd } from "antd";
 
 type TInputProps = {
   placeholder?: string | undefined;
-  value?: string | number | bigint | readonly string[] | undefined;
-  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
   required?: boolean | undefined;
+  maxLength?: number | undefined;
+  minLength?: number | undefined;
 };
 
 const Input = ({
   placeholder,
-  value,
-  onChange,
-  onBlur,
   required,
+  maxLength,
+  minLength,
+  ...props
 }: TInputProps) => {
   return (
     <InputAntd
+      maxLength={maxLength}
       placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
       required={required}
-    ></InputAntd>
+      minLength={minLength}
+      {...props}
+    />
   );
 };
 export { Input };
