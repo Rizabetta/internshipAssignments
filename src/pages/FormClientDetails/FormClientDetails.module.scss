@@ -1,0 +1,35 @@
+.container {
+  margin: 0 auto;
+  h1 {
+    text-align: center;
+    font-family: Quicksand-400;
+    font-family: "Segoe UI";
+    -webkit-font-smoothing: antialiased;
+    margin: 0 0 20px 0;
+  }
+  background: rgb(100, 108, 255);
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.formItem {
+  display: flex;
+  margin: auto;
+  align-items: center;
+}
+
+.itemName {
+  padding: 3px 30px 3px 0;
+}
+
+.itemContent {
+  margin: 10px 0;
+}
+
+.btnSubmit {
+  margin-top: 26px;
+}
