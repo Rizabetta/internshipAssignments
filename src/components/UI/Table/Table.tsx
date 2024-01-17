@@ -1,9 +1,8 @@
 import { nanoid } from "nanoid";
 import { Table as TableAntd } from "antd";
 
-type Posts = {
+type TPostsFiltered = {
   posts: {
-    postId: number;
     id: number;
     name: string;
     email: string;
@@ -11,7 +10,7 @@ type Posts = {
   }[];
 };
 
-const Table = ({ posts }: Posts) => {
+const Table = ({ posts }: TPostsFiltered) => {
   let columns;
   let dataSource;
   if (posts && posts.length > 0) {
