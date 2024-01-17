@@ -3,17 +3,13 @@ import { TPicker } from "../DatePicker/DatePicker";
 
 export type TRangePickerProps = {
   picker?: TPicker;
-  rangePickerPlaceholder?: [string, string] | undefined;
+  placeholder?: [string, string];
 };
 
-const RangePicker = ({
-  picker,
-  rangePickerPlaceholder,
-  ...props
-}: TRangePickerProps) => {
+const RangePicker = ({ picker, placeholder, ...props }: TRangePickerProps) => {
   return (
     <DatePickerAntd.RangePicker
-      placeholder={rangePickerPlaceholder}
+      placeholder={placeholder}
       picker={picker}
       {...props}
     />

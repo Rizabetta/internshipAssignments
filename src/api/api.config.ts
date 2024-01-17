@@ -18,7 +18,7 @@ const makeApiRequest = async (method: Methods, path: string, data = {}) => {
     });
     return res;
   } catch (error) {
-    throw new Error("F to fetch data");
+    throw new Error("Failed to fetch data");
   }
 };
 

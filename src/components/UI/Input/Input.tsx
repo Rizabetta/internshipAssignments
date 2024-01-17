@@ -1,10 +1,10 @@
 import { Input as InputAntd } from "antd";
 
 type TInputProps = {
-  placeholder?: string | undefined;
-  required?: boolean | undefined;
-  maxLength?: number | undefined;
-  minLength?: number | undefined;
+  placeholder?: string;
+  required?: boolean;
+  maxLength?: number;
+  minLength?: number;
 };
 
 const Input = ({

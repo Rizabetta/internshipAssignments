@@ -60,7 +60,7 @@ const clientDetails = [
     label: "Даты начала и окончания обучения",
     name: "DatesTraining",
     required: true,
-    rangePickerPlaceholder: ["Дата начала", "Дата окончания"],
+    placeholder: ["Дата начала", "Дата окончания"],
     component: RangePicker,
   },
   {

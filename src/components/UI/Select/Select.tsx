@@ -2,16 +2,16 @@ import { Select as SelectAntd } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 
 export type TSelectProps = {
-  mode?: "multiple" | "tags" | undefined;
+  mode?: "multiple" | "tags";
   size?: SizeType;
   defaultValue?: any;
   options?: {
     label: string;
     value: string;
   }[];
-  placeholder?: React.ReactNode;
-  required?: boolean | undefined;
-  optionLabelProp?: string | undefined;
+  placeholder?: string;
+  required?: boolean;
+  optionLabelProp?: string;
 };
 
 const Select = ({
