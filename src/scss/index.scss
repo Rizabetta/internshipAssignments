@@ -34,3 +34,13 @@ html,
 body, #root {
   height: 100%;
 }
+
+.ant-table
+  .ant-table-container
+  .ant-table-content
+  table
+  thead.ant-table-thead
+  .ant-table-cell {
+  background-color: #747bff;
+  color: white;
+}

@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  flex-direction: column;
 
   h1 {
     text-align: center;
@@ -24,9 +25,24 @@
 }
 
 .itemName {
-  padding: 3px 30px 3px 0;
+  padding-right: 20px;
+  width: 20%;
 }
 
+.itemContent {
+  width: 90%;
+}
 .btnSubmit {
-  margin-top: 26px;
+  margin: 26px 0 0 26px;
+}
+
+.navigateBtn {
+  background-color: rgb(100, 108, 255);
+  border: none;
+  color: aliceblue;
+}
+
+.navigateBtn:focus,
+.navigateBtn:focus-visible {
+  outline: none;
 }
