@@ -1,10 +1,14 @@
 import { Input as InputAntd } from "antd";
+import { InputNumber as InputNumberAntd } from "antd";
 
 type TInputProps = {
   placeholder?: string;
   required?: boolean;
   maxLength?: number;
   minLength?: number;
+  className?: string;
+  isNumber?: boolean;
+  addonBefore?: string;
 };
 
 const Input = ({
@@ -12,16 +16,34 @@ const Input = ({
   required,
   maxLength,
   minLength,
+  className,
+  isNumber,
+  addonBefore,
   ...props
 }: TInputProps) => {
   return (
-    <InputAntd
-      maxLength={maxLength}
-      placeholder={placeholder}
-      required={required}
-      minLength={minLength}
-      {...props}
-    />
+    <>
+      {isNumber ? (
+        <InputNumberAntd
+          className={className}
+          addonBefore={addonBefore}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          minLength={minLength}
+          controls={false}
+          {...props}
+        />
+      ) : (
+        <InputAntd
+          className={className}
+          maxLength={maxLength}
+          placeholder={placeholder}
+          required={required}
+          minLength={minLength}
+          {...props}
+        />
+      )}
+    </>
   );
 };
 export { Input };
