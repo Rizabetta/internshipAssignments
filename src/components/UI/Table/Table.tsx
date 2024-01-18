@@ -1,42 +1,22 @@
-import { nanoid } from "nanoid";
 import { Table as TableAntd } from "antd";
+import { AnyObject } from "antd/es/_util/type";
 
 type TPostsFiltered = {
-  posts: {
-    id: number;
-    name: string;
-    email: string;
-    body: string;
-  }[];
+  dataSource?: readonly AnyObject[];
+  columns?: any;
 };
 
-const Table = ({ posts }: TPostsFiltered) => {
-  let columns;
-  let dataSource;
-  if (posts && posts.length > 0) {
-    const keys = Object.keys(posts[0]);
-    columns = keys.map((key) => ({
-      title: key,
-      dataIndex: key,
-      key: key,
-      sorter: (a: any, b: any) => a.key - b.key,
-      ellipsis: true,
-    }));
-    dataSource = posts.map((el) => ({ ...el, key: nanoid() }));
-  }
-
+const Table = ({ dataSource, columns }: TPostsFiltered) => {
   return (
-    <div>
-      <TableAntd
-        dataSource={dataSource}
-        columns={columns}
-        pagination={{
-          defaultPageSize: 2,
-          showSizeChanger: true,
-          pageSizeOptions: [2, 4, 6, 8],
-        }}
-      ></TableAntd>
-    </div>
+    <TableAntd
+      dataSource={dataSource}
+      columns={columns}
+      pagination={{
+        defaultPageSize: 2,
+        showSizeChanger: true,
+        pageSizeOptions: [2, 4, 6, 8],
+      }}
+    ></TableAntd>
   );
 };
 export { Table };
