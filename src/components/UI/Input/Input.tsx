@@ -9,9 +9,12 @@ type TInputProps = {
   className?: string;
   isNumber?: boolean;
   addonBefore?: string;
+  status?: "" | "warning" | "error";
+  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
 };
 
 const Input = ({
+  onBlur,
   placeholder,
   required,
   maxLength,
@@ -19,22 +22,28 @@ const Input = ({
   className,
   isNumber,
   addonBefore,
+  status,
   ...props
 }: TInputProps) => {
   return (
     <>
       {isNumber ? (
         <InputNumberAntd
+          required={required}
           className={className}
           addonBefore={addonBefore}
           placeholder={placeholder}
           maxLength={maxLength}
           minLength={minLength}
           controls={false}
+          status={status}
+          onBlur={onBlur}
           {...props}
         />
       ) : (
         <InputAntd
+          onBlur={onBlur}
+          status={status}
           className={className}
           maxLength={maxLength}
           placeholder={placeholder}
