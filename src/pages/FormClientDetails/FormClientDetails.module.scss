@@ -9,12 +9,14 @@
   height: 100%;
   flex-direction: column;
 
+  p {margin: 0;}
+
   h1 {
     text-align: center;
     font-family: Quicksand-400;
     font-family: "Segoe UI";
     -webkit-font-smoothing: antialiased;
-    margin: 0 0 20px 0;
+    margin: 0 0 15px 0;
   }
 }
 
@@ -22,6 +24,8 @@
   display: flex;
   margin: auto;
   align-items: center;
+  padding: 5px 0;
+  margin: 10px 0;
 }
 
 .itemName {
@@ -30,10 +34,20 @@
 }
 
 .itemContent {
+  .itemMessage {
+    color: red;
+    font-size: 12px;
+  }
+
   width: 90%;
 }
+
+.itemInput {
+  width: 100%;
+}
+
 .btnSubmit {
-  margin: 26px 0 0 26px;
+  margin: 26px 26px 0 0;
 }
 
 .navigateBtn {
