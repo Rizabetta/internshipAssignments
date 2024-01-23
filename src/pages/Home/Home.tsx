@@ -48,9 +48,11 @@ function Home() {
   }
 
   return (
-    <section className={style.container}>
-      <Button onClick={() => navigate("/details")}>Создать</Button>
-      <Table dataSource={dataSource} columns={columns}></Table>
+    <section className={style.page}>
+      <div className={style.container}>
+        <Button onClick={() => navigate("/details")}>Создать</Button>
+        <Table dataSource={dataSource} columns={columns}></Table>
+      </div>
     </section>
   );
 }
