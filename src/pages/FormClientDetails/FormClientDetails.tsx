@@ -1,71 +1,67 @@
-import { useState } from "react";
-import { useForm, Controller, SubmitHandler, FieldPath } from "react-hook-form";
+import { useMemo } from "react";
+import { Controller, SubmitHandler, FieldPath } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import { nanoid } from "nanoid";
 import style from "./FormClientDetails.module.scss";
 import { FormWrapper, Modal } from "../../components";
-import { clientDetails } from "./FormClientDetails.constant";
+import { TFormData, clientDetails } from "./FormClientDetails.constant";
+import { useModal } from "./useModal";
+import { FormHandler } from "./FormHandler";
 
 const FormClientDetails = () => {
-  const [open, setOpen] = useState(false);
-  const showModal = () => {
-    setOpen(true);
-  };
-  const handleOk = () => {
-    setOpen(false);
-  };
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
-  type TFormData = {
-    Birthday: any;
-    City: any;
-    ITN: number;
-    MiddleName: string;
-    Name: string;
-    PhoneNumber: number;
-    DatesTraining: any;
-    Surname: string;
-  };
-
+  const { open, showModal, handleOk, handleCancel } = useModal();
   const {
+    openModalCancel,
+    handleOkModalCancel,
+    handleCancelModalCancel,
+    showModalCancel,
     handleSubmit,
-    reset,
     control,
     trigger,
     formState: { errors },
-  } = useForm<TFormData>();
+  } = FormHandler();
+
   const onSubmit: SubmitHandler<TFormData> = (data) => {
-    if (!data.Name) errors.Name;
     showModal();
     console.log(data);
   };
+
+  const fieldsToValidate = useMemo(() => {
+    const requiredDetails = clientDetails.filter((detail) => detail.required);
+    return requiredDetails.map(
+      (detail) => detail.name
+    ) as FieldPath<TFormData>[];
+  }, [clientDetails]);
+
   const handleButtonClick = async () => {
-    const fieldsToValidate: FieldPath<TFormData>[] = ["Name", "Surname", "ITN"];
     await trigger(fieldsToValidate);
   };
 
   const handleBlur = async (event: any) => {
     const inputName = event.target.name;
-    const fieldsToValidate: FieldPath<TFormData>[] = ["Name", "Surname", "ITN"];
     if (fieldsToValidate.includes(inputName)) await trigger(inputName);
   };
 
   const navigate = useNavigate();
-
-  const [openModalCancel, setOpenModalCancel] = useState(false);
-  const showModalCancel = () => {
-    setOpenModalCancel(true);
-  };
-  const handleOkModalCancel = () => {
-    reset();
-    setOpenModalCancel(false);
-  };
-  const handleCancelModalCancel = () => {
-    setOpenModalCancel(false);
-  };
+  const modalData = [
+    {
+      title: "Применить изменения?",
+      open: open,
+      handleOk: handleOk,
+      handleCancel: handleCancel,
+      onClickNo: handleCancel,
+      onClickYes: handleOk,
+    },
+    {
+      title: "Вы хотите очистить форму?",
+      open: openModalCancel,
+      handleOk: handleOkModalCancel,
+      handleCancel: handleCancelModalCancel,
+      onClickNo: handleCancelModalCancel,
+      onClickYes: handleOkModalCancel,
+    },
+  ];
 
   return (
     <section className={style.container}>
@@ -126,32 +122,22 @@ const FormClientDetails = () => {
               Применить
             </Button>
             <Button onClick={showModalCancel}>Отменить</Button>
-            <Modal
-              title={"Применить изменения?"}
-              open={open}
-              handleOk={handleOk}
-              handleCancel={handleCancel}
-            >
-              <Button key="back" onClick={handleCancel}>
-                Нет
-              </Button>
-              <Button type="primary" onClick={handleOk}>
-                Да
-              </Button>
-            </Modal>
-            <Modal
-              title={"Вы хотите очистить форму?"}
-              open={openModalCancel}
-              handleOk={handleOkModalCancel}
-              handleCancel={handleCancelModalCancel}
-            >
-              <Button key="back" onClick={handleCancelModalCancel}>
-                Нет
-              </Button>
-              <Button type="primary" onClick={handleOkModalCancel}>
-                Да
-              </Button>
-            </Modal>
+            {modalData.map((element) => (
+              <Modal
+                key={nanoid()}
+                title={element.title}
+                open={element.open}
+                handleOk={element.handleOk}
+                handleCancel={element.handleCancel}
+              >
+                <Button key="back" onClick={element.onClickNo}>
+                  Нет
+                </Button>
+                <Button type="primary" onClick={element.onClickYes}>
+                  Да
+                </Button>
+              </Modal>
+            ))}
           </form>
         </FormWrapper>
       </div>
