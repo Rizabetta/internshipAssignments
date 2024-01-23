@@ -103,9 +103,11 @@ const FormClientDetails = () => {
                             {...rest}
                             {...props}
                           />
-                            <span className={style.itemMessage}>
-                              {errors[name as keyof TFormData]?.message?.toString()}
-                            </span>
+                          <span className={style.itemMessage}>
+                            {errors[
+                              name as keyof TFormData
+                            ]?.message?.toString()}
+                          </span>
                         </div>
                       );
                     }}
@@ -157,4 +159,4 @@ const FormClientDetails = () => {
   );
 };
 
-export { FormClientDetails };
+export default FormClientDetails;

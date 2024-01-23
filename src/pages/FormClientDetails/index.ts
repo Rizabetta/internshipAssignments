@@ -1,1 +1,1 @@
-export { FormClientDetails } from "./FormClientDetails";
+export { FormClientDetailsAsync as  FormClientDetails} from "./FormClientDetails.async";
