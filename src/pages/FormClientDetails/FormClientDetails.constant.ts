@@ -7,6 +7,16 @@ export type TCity = {
     city: string;
   };
 };
+export type TFormData = {
+  Birthday: any;
+  City: any;
+  ITN: number;
+  MiddleName: string;
+  Name: string;
+  PhoneNumber: number;
+  DatesTraining: any;
+  Surname: string;
+};
 
 const result = await requests.makeApiRequest(Methods.GET, "/users");
 const mappedResult = result.data.map((obj: TCity) => {
