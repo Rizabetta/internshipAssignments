@@ -9,10 +9,10 @@ import style from "./IncomingDocument.module.scss";
 import { Button } from "antd";
 
 const IncomingDocument = () => {
-  const params = useParams();
+  const {id} = useParams();
   let str;
   let data;
-  if (!!params.id) str = localStorage.getItem(params.id);
+  if (!!id) str = localStorage.getItem(id);
   if (!!str) data = JSON.parse(str);
 
   const navigate = useNavigate();
