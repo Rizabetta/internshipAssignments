@@ -8,14 +8,15 @@ export type TCity = {
   };
 };
 export type TFormData = {
-  Birthday: any;
-  City: any;
+  Birthday?: any;
+  City?: any;
   ITN: number;
-  MiddleName: string;
+  MiddleName?: string;
   Name: string;
-  PhoneNumber: number;
-  DatesTraining: any;
+  PhoneNumber?: number;
+  DatesTraining?: any;
   Surname: string;
+  todayDate?:string;
 };
 
 const result = await requests.makeApiRequest(Methods.GET, "/users");

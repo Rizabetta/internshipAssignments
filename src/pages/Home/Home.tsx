@@ -14,7 +14,7 @@ type TPosts = {
   body: string;
 }[];
 
-function Home() {
+const Home = () => {
   const [posts, setPosts] = useState<TPosts>([]);
   useEffect(() => {
     requests
@@ -55,6 +55,6 @@ function Home() {
       </div>
     </section>
   );
-}
+};
 
 export { Home };
