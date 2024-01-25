@@ -1,0 +1,19 @@
+.container {
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.navigateBtn {
+  margin-top: 16px;
+  box-shadow: none;
+  border: none;
+}
+
+.navigateBtn:focus,
+.navigateBtn:focus-visible {
+  outline: none;
+}

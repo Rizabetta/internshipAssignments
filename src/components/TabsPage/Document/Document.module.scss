@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgb(219, 216, 240);
+  padding-bottom: 15px;
+}
+
+.status {
+  background-color: rgb(47, 166, 142);
+  padding: 6px 12px;
+  border-radius: 7%;
+  margin-left: 40px;
+}
+
+.edit {
+  border: none;
+  opacity: 40%;
+}
+.edit:focus,
+.edit:focus-visible {
+  outline: none;
+}
+
+.detail {
+  display: flex;
+}
+
+.detailTitle {
+  width: 40%;
+}

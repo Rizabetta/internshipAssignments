@@ -1,0 +1,43 @@
+.content {
+  display: none;
+}
+
+.tabs {
+  cursor: pointer;
+  width: 100%;
+  &__container {
+    width: 100%;
+  }
+  &__block {
+    display: flex;
+    font-size: 16px;
+    font-family: Ubuntu-500;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    p {
+      font-family: "Segoe UI";
+    }
+  }
+  p:hover {
+    color: rgb(100, 108, 255);
+    transition: color 200ms linear, text-shadow 500ms linear;
+  }
+  p:not(:hover) {
+    transition: 0.6s;
+  }
+
+  &__content {
+    flex-grow: 1;
+    margin-top: 15px;
+  }
+}
+
+.active-content {
+  display: block;
+}
+
+.active-tabs {
+  border-bottom: 2px solid rgb(100, 108, 255);
+  color: rgb(100, 108, 255);
+}

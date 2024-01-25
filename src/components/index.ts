@@ -5,3 +5,7 @@ export { Select } from "./UI/Select";
 export { DatePicker } from "./UI/DatePicker";
 export { RangePicker } from "./UI/RangePicker";
 export { FormWrapper } from "./FormWrapper";
+export { Tabs } from "./UI/Tabs";
+export { RelatedDocuments } from "./TabsPage";
+export { DocumentHistory } from "./TabsPage";
+export { Document } from "./TabsPage";

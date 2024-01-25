@@ -1,0 +1,1 @@
+export { IncomingDocument } from "./IncomingDocument";
