@@ -1,4 +1,4 @@
-import { FormClientDetails, Home } from "../pages";
+import { FormClientDetails, Home, IncomingDocument } from "../pages";
 
 export enum RouteNames {
   NOT = "*",
@@ -9,4 +9,5 @@ export enum RouteNames {
 export const routes = [
   { path: RouteNames.HOME, element: <Home /> },
   { path: RouteNames.DETAILS, element: <FormClientDetails /> },
+  { path: RouteNames.DETAILS+"/:id", element: <IncomingDocument /> },
 ];

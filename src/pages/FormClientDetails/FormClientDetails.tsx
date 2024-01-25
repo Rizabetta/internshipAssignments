@@ -23,8 +23,13 @@ const FormClientDetails = () => {
   } = FormHandler();
 
   const onSubmit: SubmitHandler<TFormData> = (data) => {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2,'0');
+    const month = String(today.getMonth()+1).padStart(2,'0');
+    const year = today.getFullYear();
+    data.todayDate = `${day}.${month}.${year}`;
     showModal();
-    console.log(data);
+    localStorage.setItem(`current`, JSON.stringify(data));
   };
 
   const fieldsToValidate = useMemo(() => {
@@ -50,16 +55,12 @@ const FormClientDetails = () => {
       open: open,
       handleOk: handleOk,
       handleCancel: handleCancel,
-      onClickNo: handleCancel,
-      onClickYes: handleOk,
     },
     {
       title: "Вы хотите очистить форму?",
       open: openModalCancel,
       handleOk: handleOkModalCancel,
       handleCancel: handleCancelModalCancel,
-      onClickNo: handleCancelModalCancel,
-      onClickYes: handleOkModalCancel,
     },
   ];
 
@@ -130,10 +131,10 @@ const FormClientDetails = () => {
                 handleOk={element.handleOk}
                 handleCancel={element.handleCancel}
               >
-                <Button key="back" onClick={element.onClickNo}>
+                <Button key="back" onClick={element.handleCancel}>
                   Нет
                 </Button>
-                <Button type="primary" onClick={element.onClickYes}>
+                <Button type="primary" onClick={element.handleOk}>
                   Да
                 </Button>
               </Modal>
